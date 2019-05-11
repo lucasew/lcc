@@ -35,6 +35,7 @@ _parse_number(struct lcc_input_wrapper *f, struct lcc_tk_number *tk, int i) {
     if (tk->num == NULL)
         return ERROR;
     tk->num[i] = '\0';
+    lcc_input__ungetc(f, c);
     return SUCESS;
 }
 
@@ -47,8 +48,6 @@ int lcc_tk_number__parse(struct lcc_input_wrapper *f, struct lcc_token *tk) {
     if (ret == ERROR)
         return ERROR;
     /* printf("%i\n", strlen(tk->number->num)); */
-    char unget = tk->number->num[strlen(tk->number->num)];
-    lcc_input__ungetc(f, unget);
     /* printf(tk->number->num); */
     tk->number->type = i64;
     return ret;

@@ -5,8 +5,11 @@ enum lcc_token_type {
     SPACE,
     NEWLINE,
     UNDEFINED,
+    SYMBOL,
+    SEMICOLON,
     NUMBER,
     STRING,
+    OP,
     TEOF
 };
 
@@ -16,6 +19,8 @@ struct lcc_token {
         struct lcc_tk_undefined *undefined;
         struct lcc_tk_number    *number;
         struct lcc_tk_str       *str;
+        struct lcc_tk_op        *op;
+        struct lcc_tk_symbol    *symbol;
     };
 };
 
@@ -25,5 +30,8 @@ struct lcc_token {
 #include "lcc_tk_space.c"
 #include "lcc_tk_newline.c"
 #include "lcc_tk_eof.c"
+#include "lcc_tk_op.c"
+#include "lcc_tk_semicolon.c"
+#include "lcc_tk_symbol.c"
 
 #endif
