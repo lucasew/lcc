@@ -1,7 +1,10 @@
 123 + 321;
-"meu nome é lucas";
-alahu akbar
+"meu nome é lucas"; // nome
+alahu /* akbar */
 22 - 30;
 22*11;
 2/3;
 ()[]{}<>
+'\''
+"\""
+123\

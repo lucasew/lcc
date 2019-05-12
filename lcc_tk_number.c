@@ -7,6 +7,7 @@
 #include "limits.h"
 #include "lcc_token.c"
 #include "lcc_input_gather.c"
+#include "lcc_parser_until.c"
 
 enum lcc_tk_number_type {
     i8,
@@ -22,21 +23,8 @@ struct lcc_tk_number {
 };
 
 
-static inline int 
-_parse_number(struct lcc_input_wrapper *f, struct lcc_tk_number *tk, int i) {
-    char c;
-    lcc_input__getc(f, &c);
-    if ((c >= '0' && c <= '9') || c == '.') {
-        int res = _parse_number(f, tk, i + 1);
-        tk->num[i] = c;
-        return res;
-    }
-    tk->num = malloc(sizeof(char)*(i + 2));
-    if (tk->num == NULL)
-        return ERROR;
-    tk->num[i] = '\0';
-    lcc_input__ungetc(f, c);
-    return SUCESS;
+int _number_validator(char c) {
+    return (c >= '0' && c <= '9') || c == '.';
 }
 
 int lcc_tk_number__parse(struct lcc_input_wrapper *f, struct lcc_token *tk) {
@@ -44,7 +32,7 @@ int lcc_tk_number__parse(struct lcc_input_wrapper *f, struct lcc_token *tk) {
     if (tk->number == NULL)
         return ERROR;
     tk->type = NUMBER;
-    int ret = _parse_number(f, tk->number, 0);
+    int ret = _parse_until(&tk->number->num ,f, _number_validator, 0);
     if (ret == ERROR)
         return ERROR;
     /* printf("%i\n", strlen(tk->number->num)); */

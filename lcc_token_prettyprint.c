@@ -29,12 +29,12 @@ lcc_token__prettyprint(struct lcc_token tk) {
         case NEWLINE:           printf("NEWLINE: '\\n' \n");break;
         case TEOF:              printf("EOF:\n");break;
         case SEMICOLON:         printf("SEMICOLON: ';'\n");break;
-        case SYMBOL:            printf("SYMBOL: '%s'\n", tk.symbol->str);break;
+        case SYMBOL:            printf("SYMBOL: '%s'\n", tk.str->str);break;
         case HASH:              printf("HASH: '#' \n");break;
         case BLOCK:             lcc_token_block__prettyprint(tk);break;
         case COMMA:             printf("COMMA: ',' \n");break;
-        case BANG:              printf("BANG: '!'\n");
-        case DOT:               printf("DOT: '.'\n");
+        case BANG:              printf("BANG: '!'\n");break;
+        case DOT:               printf("DOT: '.'\n");break;
         case STRING_LITERAL:    printf("STRING_LITERAL: '%s'\n", tk.str->str);break;
         case BACKSLASH:         printf("BACKSLASH: '\\' \n");break;
         case ECOMMERCIAL:       printf("E_COMMERCIAL: '&'\n");break;

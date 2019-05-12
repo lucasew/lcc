@@ -2,6 +2,7 @@
 #define LCC_TOKEN
 
 enum lcc_token_type {
+    INVALID,
     BANG,
     BLOCK,
     COMMA,

@@ -7,26 +7,15 @@
 #include "limits.h"
 #include "lcc_token.c"
 #include "lcc_input_gather.c"
+#include "lcc_parser_until.c"
 
 struct lcc_tk_str {
     char *str;
 };
 
 
-static inline int 
-_parse_str(struct lcc_input_wrapper *f, struct lcc_tk_str *tk, int i) {
-    char c;
-    lcc_input__getc(f, &c);
-    if (c != ('"')) {
-        int res = _parse_str(f, tk, i + 1);
-        tk->str[i] = c;
-        return res;
-    }
-    tk->str = malloc(sizeof(char)*(i + 2));
-    if (tk->str == NULL)
-        return ERROR;
-    tk->str[i] = '\0';
-    return SUCESS;
+int _str_validator(char c) {
+    return c != '"';
 }
 
 int lcc_tk_str__parse(struct lcc_input_wrapper *f, struct lcc_token *tk) {
@@ -35,7 +24,7 @@ int lcc_tk_str__parse(struct lcc_input_wrapper *f, struct lcc_token *tk) {
         return ERROR;
     char unget;
     lcc_input__getc(f, &unget); // Excludes the first "
-    int ret = _parse_str(f, tk->str, 0);
+    int ret = _parse_until(&tk->str->str, f, _str_validator, 0);
     if (ret == ERROR)
         return ERROR;
     /* printf("%i\n", strlen(tk->number->num)); */

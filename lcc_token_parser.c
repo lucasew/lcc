@@ -6,6 +6,8 @@
 #include "lcc_status.h" 
 #include "lcc_input_gather.c"
 
+#include "lcc_tk_maybecomment.c"
+
 const int handlers[] = {
     TEOF, // 'EOF (-1)'
     UNDEFINED, // '' (0)
@@ -150,6 +152,7 @@ lcc_token_handler lcc_get_appropriate_handler(char c) {
         case STRING: return lcc_tk_str__parse;
         case SYMBOL: return lcc_tk_sym__parse;
         case UNDEFINED: return lcc_tk_undefined__parse;
+        case DIV: return lcc_tk_maybecomment__parse;
         default: return NULL;
     }
     return NULL;
@@ -166,7 +169,10 @@ int lcc_parse_tokens(struct lcc_input_wrapper *input, struct lcc_token *tk) {
     tk->type = handlers[c + 1];
     lcc_token_handler parser = lcc_get_appropriate_handler(c);
     if (parser != NULL) {
-        return parser(input, tk);
+        int ret = parser(input, tk);
+        if (tk->type == INVALID)
+            return lcc_parse_tokens(input, tk);
+        return ret;
     }
     lcc_input__getc(input, &c);
     return SUCESS;
