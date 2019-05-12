@@ -14,6 +14,7 @@ enum lcc_op_type {
     MUL,
     DIV,
     ATTRIB,
+    PIPE
 };
 
 struct lcc_tk_op {
@@ -35,6 +36,7 @@ int lcc_tk_op__parse(struct lcc_input_wrapper *f, struct lcc_token *tk) {
     LCC_OP_RULE('*', MUL);
     LCC_OP_RULE('/', DIV);
     LCC_OP_RULE('=', ATTRIB);
+    LCC_OP_RULE('|', PIPE);
     /* printf(tk->number->num); */
     return SUCESS;
 }
