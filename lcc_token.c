@@ -37,16 +37,8 @@ struct lcc_token {
 #include "lcc_tk_str.c"
 #include "lcc_tk_strliteral.c"
 #include "lcc_tk_undefined.c"
-/* #include "lcc_tk_space.c" */
-/* #include "lcc_tk_newline.c" */
-/* #include "lcc_tk_eof.c" */
 #include "lcc_tk_op.c"
-/* #include "lcc_tk_semicolon.c" */
 #include "lcc_tk_symbol.c"
-/* #include "lcc_tk_hash.c" */
 #include "lcc_tk_block.c"
-/* #include "lcc_tk_comma.c" */
-/* #include "lcc_tk_dot.c" */
-/* #include "lcc_tk_bang.c" */
 
 #endif
