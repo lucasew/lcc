@@ -1,0 +1,6 @@
+// Isto é um comentário
+/* Isto também
+
+continuando aqui*/
+
+// O programa não pode retornar nenhum token além de espaço, newline e eof
