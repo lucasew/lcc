@@ -4,19 +4,6 @@
 #include "lcc_token.c"
 #include "lcc_tk_undefined.c"
 
-void lcc_token_op__prettyprint(struct lcc_token tk) {
-    printf("OP: ");
-    switch(tk.op->type) {
-        case SUM: printf("SUM");break;
-        case SUB: printf("SUB");break;
-        case MUL: printf("MUL");break;
-        case DIV: printf("DIV");break;
-        case ATTRIB: printf("ATTRIB");break;
-        default: printf("UNKNOWN");break;
-    }
-    printf("\n");
-}
-
 void lcc_token_block__prettyprint(struct lcc_token tk) {
     printf("BLOCK: ");
     if(tk.block->openess == OPEN)
@@ -41,7 +28,6 @@ lcc_token__prettyprint(struct lcc_token tk) {
         case SPACE:             printf("SPACE: ' '\n");break;
         case NEWLINE:           printf("NEWLINE: '\\n' \n");break;
         case TEOF:              printf("EOF:\n");break;
-        case OP:                lcc_token_op__prettyprint(tk);break;
         case SEMICOLON:         printf("SEMICOLON: ';'\n");break;
         case SYMBOL:            printf("SYMBOL: '%s'\n", tk.symbol->str);break;
         case HASH:              printf("HASH: '#' \n");break;
@@ -52,6 +38,12 @@ lcc_token__prettyprint(struct lcc_token tk) {
         case STRING_LITERAL:    printf("STRING_LITERAL: '%s'\n", tk.str->str);break;
         case BACKSLASH:         printf("BACKSLASH: '\\' \n");break;
         case ECOMMERCIAL:       printf("E_COMMERCIAL: '&'\n");break;
+        case ATTRIB:            printf("ATTRIB: '='\n");break;
+        case DIV:               printf("DIV: '/'\n");break;
+        case MUL:               printf("MUL: '*'\n");break;
+        case PIPE:              printf("PIPE: '|'\n");break;
+        case SUB:               printf("SUB: '-'\n");break;
+        case SUM:               printf("SUM: '+'\n");break;
         default:                printf("TOKEN NOT RECOGNIZED '%i'\n", tk.type);
     }
     /* free(tk.undefined); // all pointers point to the same address */

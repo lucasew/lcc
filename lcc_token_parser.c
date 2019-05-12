@@ -50,12 +50,12 @@ const int handlers[] = {
     STRING_LITERAL, // ''' (39)
     BLOCK, // '(' (40)
     BLOCK, // ')' (41)
-    OP, // '*' (42)
-    OP, // '+' (43)
+    MUL, // '*' (42)
+    SUM, // '+' (43)
     COMMA, // ',' (44)
-    OP, // '-' (45)
+    SUB, // '-' (45)
     DOT, // '.' (46)
-    OP, // '/' (47)
+    DIV, // '/' (47)
     NUMBER, // '0' (48)
     NUMBER, // '1' (49)
     NUMBER, // '2' (50)
@@ -69,7 +69,7 @@ const int handlers[] = {
     UNDEFINED, // ':' (58)
     SEMICOLON, // ';' (59)
     BLOCK, // '<' (60)
-    OP, // '=' (61)
+    ATTRIB, // '=' (61)
     BLOCK, // '>' (62)
     UNDEFINED, // '?' (63)
     UNDEFINED, // '@' (64)
@@ -146,7 +146,6 @@ lcc_token_handler lcc_get_appropriate_handler(char c) {
     switch (handler) {
         case BLOCK: return lcc_tk_block__parse;
         case NUMBER: return lcc_tk_number__parse;
-        case OP: return lcc_tk_op__parse;
         case STRING_LITERAL: return lcc_tk_str_literal__parse;
         case STRING: return lcc_tk_str__parse;
         case SYMBOL: return lcc_tk_sym__parse;

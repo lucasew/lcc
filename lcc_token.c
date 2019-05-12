@@ -9,7 +9,6 @@ enum lcc_token_type {
     HASH,
     NEWLINE,
     NUMBER,
-    OP,
     SEMICOLON,
     SPACE,
     STRING,
@@ -18,7 +17,17 @@ enum lcc_token_type {
     TEOF,
     BACKSLASH,
     ECOMMERCIAL,
-    UNDEFINED
+    UNDEFINED,
+    SUM,
+    SUB,
+    MUL,
+    DIV,
+    ATTRIB,
+    PIPE,
+    // Composed SYMBOLS
+    NOTEQUAL, // BANG + OP.EQUAL
+    MORETHAN, // CLOSE
+    
 };
 
 
@@ -37,7 +46,6 @@ struct lcc_token {
 #include "lcc_tk_str.c"
 #include "lcc_tk_strliteral.c"
 #include "lcc_tk_undefined.c"
-#include "lcc_tk_op.c"
 #include "lcc_tk_symbol.c"
 #include "lcc_tk_block.c"
 
